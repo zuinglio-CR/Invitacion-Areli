@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitación de Areli 🎂</title>
+    
+    <meta property="og:title" content="¡Invitación al Primer Añito de Areli Valentina Calderon Alva! 🎂">
+    <meta property="og:description" content="Te esperamos para celebrar este día tan especial.">
+    <meta property="og:image" content="https://i.postimg.cc/Xv31t7mj/IMG-3948.jpg">
+    <meta property="og:url" content="https://zuinglio-cr.github.io/Invitacion-Areli/">
+
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --rosa-areli: #ffdae9;
@@ -36,7 +43,6 @@
         .foto-bebe {
             width: 100%;
             height: 350px;
-            /* REEMPLAZA ESTE LINK POR LA FOTO DE ARELI */
             background-image: url('https://i.postimg.cc/Xv31t7mj/IMG-3948.jpg');
             background-size: cover;
             background-position: center;
@@ -67,7 +73,34 @@
             border: 1px solid #f8bbd0;
         }
 
-        .botones-container { margin-top: 25px; }
+        .info-evento {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff9fb;
+            border-radius: 20px;
+        }
+
+        .dato {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .icono { font-size: 1.5em; margin-right: 10px; }
+
+        .btn-mapa {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
 
         .btn {
             display: block;
@@ -82,99 +115,76 @@
 
         .btn-mama { background-color: #ec407a; }
         .btn-papa { background-color: #29b6f6; }
-        .btn:active { transform: scale(0.95); }
+
+        .cuenta-regresiva { margin: 20px 0; padding: 10px; }
+        .cuenta-regresiva h3 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--rosa-fuerte);
+            margin-bottom: 5px;
+        }
+
+        .reloj-container {
+            display: flex;
+            justify-content: space-around;
+            background: var(--rosa-fuerte);
+            color: white;
+            padding: 15px;
+            border-radius: 20px;
+        }
+
+        .reloj-container div { display: flex; flex-direction: column; }
+        .reloj-container span { font-size: 1.5em; font-weight: bold; }
+        .reloj-container small { font-size: 0.7em; text-transform: uppercase; }
     </style>
 </head>
-    <meta property="og:title" content="¡Invitación al Primer Añito de Areli Valentina Calderon Alva! 🎂">
-    <meta property="og:description" content="Te esperamos para celebrar este día tan especial.">
-    <meta property="og:image" content="https://i.postimg.cc/Xv31t7mj/IMG-3948.jpg">
-    <meta property="og:url" content="https://zuinglio-cr.github.io/Invitacion-Areli/">
 <body>
 
-    <div class="info-evento">
-    <div class="dato">
-        <span class="icono">📅</span>
-        <p><b>Domingo, 29 de Marzo</b><br>3:30 PM</p>
-    </div>
-    
-    <div class="dato">
-        <span class="icono">📍</span>
-        <p><b>Salón de Eventos "La Prechochura"</b><br>Av. Oasis, Morales</p>
+    <div class="tarjeta">
+        <div class="foto-bebe"></div>
+        
+        <div class="cuerpo">
+            <p>¡Hola!</p>
+            <div class="invitado-nombre" id="txt-nombre">Cargando...</div>
+            
+            <h1>¡Mi Primer Añito!</h1>
+            
+            <div class="pases-tag">
+                🎟️ Cupos: <span id="txt-pases">0</span> pases
+            </div>
+
+            <div class="info-evento">
+                <div class="dato">
+                    <span class="icono">📅</span>
+                    <p><b>Domingo, 29 de Marzo</b><br>3:30 PM</p>
+                </div>
+                <div class="dato">
+                    <span class="icono">📍</span>
+                    <p><b>Salón de Eventos "La Prechochura"</b><br>Av. Oasis, Morales</p>
+                </div>
+                <a href="https://maps.app.goo.gl/3q2uBwXy5G3Vw5j87" target="_blank" class="btn-mapa">
+                    Ver ubicación en el Mapa 🗺️
+                </a>
+            </div>
+
+            <div class="cuenta-regresiva">
+                <h3>Faltan:</h3>
+                <div id="reloj" class="reloj-container">
+                    <div><span id="dias">00</span><small>Días</small></div>
+                    <div><span id="horas">00</span><small>Horas</small></div>
+                    <div><span id="minutos">00</span><small>Min.</small></div>
+                </div>
+            </div>
+
+            <div class="botones-container">
+                <p><b>Confirma tu asistencia:</b></p>
+                <a id="wa-mama" target="_blank" class="btn btn-mama">Confirmar con Mamá 🌸</a>
+                <a id="wa-papa" target="_blank" class="btn btn-papa">Confirmar con Papá 🎈</a>
+            </div>
+        </div>
     </div>
 
-    <a href="https://maps.app.goo.gl/7SCLjYWjw76CAPqZ7" target="_blank" class="btn-mapa">
-        Ver ubicación en el Mapa 🗺️
-    </a>
-    <div class="cuenta-regresiva">
-    <h3>Faltan:</h3>
-    <div id="reloj" class="reloj-container">
-        <div><span id="dias">00</span><small>Días</small></div>
-        <div><span id="horas">00</span><small>Horas</small></div>
-        <div><span id="minutos">00</span><small>Min.</small></div>
-    </div>
-</div>
-<style>
-    /* Añade estos estilos en tu sección <style> */
-    .info-evento {
-        margin: 20px 0;
-        padding: 15px;
-        background-color: #fff9fb;
-        border-radius: 20px;
-    }
-    .dato {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 10px;
-        font-size: 0.9em;
-    }
-    .icono {
-        font-size: 1.5em;
-        margin-right: 10px;
-    }
-    .btn-mapa {
-        display: inline-block;
-        background-color: #4CAF50; /* Color verde Google Maps */
-        color: white;
-        padding: 10px 20px;
-        text-decoration: none;
-        border-radius: 50px;
-        font-size: 0.8em;
-        font-weight: bold;
-        margin-top: 10px;
-    }
-    .cuenta-regresiva {
-        margin: 20px 0;
-        padding: 10px;
-    }   
-    .cuenta-regresiva h3 {
-        font-family: 'Dancing Script', cursive;
-        color: var(--rosa-fuerte);
-        margin-bottom: 5px;
-    }
-    .reloj-container {
-        display: flex;
-        justify-content: space-around;
-        background: var(--rosa-fuerte);
-        color: white;
-        padding: 15px;
-        border-radius: 20px;
-    }
-    .reloj-container div {
-        display: flex;
-        flex-direction: column;
-    }
-    .reloj-container span {
-        font-size: 1.5em;
-        font-weight: bold;
-    }
-    .reloj-container small {
-        font-size: 0.7em;
-        text-transform: uppercase;
-}
-</style>
     <script>
-        // CAPTURA DE DATOS DE LA URL
+        // 1. CAPTURA DE DATOS DE LA URL
         const query = new URLSearchParams(window.location.search);
         const nombreInvi = (query.get('invitados') || "Amigo/a").replace(/_/g, ' ');
         const pasesInvi = query.get('pases') || "1";
@@ -182,41 +192,36 @@
         document.getElementById('txt-nombre').innerText = nombreInvi;
         document.getElementById('txt-pases').innerText = pasesInvi;
 
-        // CONFIGURACIÓN DE WHATSAPP (PON TUS NÚMEROS AQUÍ)
+        // 2. CONFIGURACIÓN DE WHATSAPP
         const numMama = "51918668270"; 
         const numPapa = "51954132546";
 
-        // MENSAJES PERSONALIZADOS
         const msgM = `¡Hola mami de Areli! ✨ Soy ${nombreInvi}. ¡Confirmamos nuestra asistencia! Reserva nuestros ${pasesInvi} pases. ¡Nos vemos pronto! 🎂`;
         const msgP = `¡Qué tal papá de Areli! 🎈 Soy ${nombreInvi}. Anótanos en la lista, iremos con gusto a celebrar con ustedes (${pasesInvi} personas). 🌸`;
 
-        // ASIGNACIÓN DE LINKS
         document.getElementById('wa-mama').href = `https://wa.me/${numMama}?text=${encodeURIComponent(msgM)}`;
         document.getElementById('wa-papa').href = `https://wa.me/${numPapa}?text=${encodeURIComponent(msgP)}`;
 
-        // Formato: Mes Día, Año Hora:Minutos:Segundos
-        const fechaFiesta = new Date("Marzo 29, 2026 15:30:00").getTime();
+        // 3. CUENTA REGRESIVA
+        const fechaFiesta = new Date("March 29, 2026 15:30:00").getTime();
 
         const countdown = setInterval(function() {
-        const ahora = new Date().getTime();
-        const distancia = fechaFiesta - ahora;
+            const ahora = new Date().getTime();
+            const distancia = fechaFiesta - ahora;
 
-        // Cálculos de tiempo
-        const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
-        const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            if (distancia > 0) {
+                const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
+                const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
 
-        // Mostrar resultados
-        document.getElementById("dias").innerText = d;
-        document.getElementById("horas").innerText = h;
-        document.getElementById("minutos").innerText = m;
-
-        // Si la fecha ya pasó
-        if (distancia < 0) {
-            clearInterval(countdown);
-            document.querySelector(".cuenta-regresiva").innerHTML = "<h3>¡Es hoy! 🥳</h3>";
-        }
-    }, 1000);
+                document.getElementById("dias").innerText = d < 10 ? "0" + d : d;
+                document.getElementById("horas").innerText = h < 10 ? "0" + h : h;
+                document.getElementById("minutos").innerText = m < 10 ? "0" + m : m;
+            } else {
+                clearInterval(countdown);
+                document.getElementById("reloj").innerHTML = "<span>¡ES HOY! 🥳</span>";
+            }
+        }, 1000);
     </script>
 </body>
 </html>
