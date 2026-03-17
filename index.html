@@ -16,7 +16,6 @@
         :root {
             --rosa-areli: #ffdae9;
             --rosa-fuerte: #f06292;
-            --dorado-suave: #f4d03f;
             --texto: #4a4a4a;
         }
 
@@ -33,7 +32,7 @@
             background: white;
             max-width: 400px;
             width: 100%;
-            border-radius: 40px 40px 20px 20px;
+            border-radius: 40px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
@@ -57,7 +56,7 @@
             margin: 10px 0;
         }
 
-        .invitado-nombre {
+        #txt-nombre {
             font-size: 1.4em;
             font-weight: bold;
             color: var(--texto);
@@ -99,7 +98,7 @@
             border-radius: 50px;
             font-size: 0.8em;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .btn {
@@ -110,18 +109,10 @@
             margin: 10px 0;
             border-radius: 20px;
             font-weight: bold;
-            transition: 0.3s;
         }
 
         .btn-mama { background-color: #ec407a; }
         .btn-papa { background-color: #29b6f6; }
-
-        .cuenta-regresiva { margin: 20px 0; padding: 10px; }
-        .cuenta-regresiva h3 {
-            font-family: 'Dancing Script', cursive;
-            color: var(--rosa-fuerte);
-            margin-bottom: 5px;
-        }
 
         .reloj-container {
             display: flex;
@@ -130,6 +121,7 @@
             color: white;
             padding: 15px;
             border-radius: 20px;
+            margin-top: 10px;
         }
 
         .reloj-container div { display: flex; flex-direction: column; }
@@ -144,7 +136,7 @@
         
         <div class="cuerpo">
             <p>¡Hola!</p>
-            <div class="invitado-nombre" id="txt-nombre">Cargando...</div>
+            <div id="txt-nombre">Cargando...</div>
             
             <h1>¡Mi Primer Añito!</h1>
             
@@ -161,13 +153,11 @@
                     <span class="icono">📍</span>
                     <p><b>Salón de Eventos "La Prechochura"</b><br>Av. Oasis, Morales</p>
                 </div>
-                <a href="https://maps.app.goo.gl/3q2uBwXy5G3Vw5j87" target="_blank" class="btn-mapa">
-                    Ver ubicación en el Mapa 🗺️
-                </a>
+                <a href="https://maps.google.com" target="_blank" class="btn-mapa">Ver ubicación 🗺️</a>
             </div>
 
             <div class="cuenta-regresiva">
-                <h3>Faltan:</h3>
+                <h3 style="font-family: 'Dancing Script'; color: var(--rosa-fuerte); margin-bottom: 5px;">Faltan:</h3>
                 <div id="reloj" class="reloj-container">
                     <div><span id="dias">00</span><small>Días</small></div>
                     <div><span id="horas">00</span><small>Horas</small></div>
@@ -184,7 +174,7 @@
     </div>
 
     <script>
-        // 1. CAPTURA DE DATOS DE LA URL
+        // 1. DATOS DE LA URL
         const query = new URLSearchParams(window.location.search);
         const nombreInvi = (query.get('invitados') || "Amigo/a").replace(/_/g, ' ');
         const pasesInvi = query.get('pases') || "1";
@@ -192,36 +182,35 @@
         document.getElementById('txt-nombre').innerText = nombreInvi;
         document.getElementById('txt-pases').innerText = pasesInvi;
 
-        // 2. CONFIGURACIÓN DE WHATSAPP
+        // 2. WHATSAPP
         const numMama = "51918668270"; 
         const numPapa = "51954132546";
+        const msgM = encodeURIComponent(`¡Hola mami de Areli! ✨ Soy ${nombreInvi}. ¡Confirmamos nuestra asistencia! Reserva nuestros ${pasesInvi} pases. 🎂`);
+        const msgP = encodeURIComponent(`¡Qué tal papá de Areli! 🎈 Soy ${nombreInvi}. Anótanos en la lista para celebrar (${pasesInvi} personas). 🌸`);
 
-        const msgM = `¡Hola mami de Areli! ✨ Soy ${nombreInvi}. ¡Confirmamos nuestra asistencia! Reserva nuestros ${pasesInvi} pases. ¡Nos vemos pronto! 🎂`;
-        const msgP = `¡Qué tal papá de Areli! 🎈 Soy ${nombreInvi}. Anótanos en la lista, iremos con gusto a celebrar con ustedes (${pasesInvi} personas). 🌸`;
+        document.getElementById('wa-mama').href = `https://wa.me/${numMama}?text=${msgM}`;
+        document.getElementById('wa-papa').href = `https://wa.me/${numPapa}?text=${msgP}`;
 
-        document.getElementById('wa-mama').href = `https://wa.me/${numMama}?text=${encodeURIComponent(msgM)}`;
-        document.getElementById('wa-papa').href = `https://wa.me/${numPapa}?text=${encodeURIComponent(msgP)}`;
+        // 3. CUENTA REGRESIVA (FECHA: 29 DE MARZO 2026)
+        const fechaFiesta = new Date("2026-03-29T15:30:00").getTime();
 
-        // 3. CUENTA REGRESIVA
-        const fechaFiesta = new Date("March 29, 2026 15:30:00").getTime();
-
-        const countdown = setInterval(function() {
+        function actualizar() {
             const ahora = new Date().getTime();
-            const distancia = fechaFiesta - ahora;
+            const dist = fechaFiesta - ahora;
 
-            if (distancia > 0) {
-                const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
-                const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-
-                document.getElementById("dias").innerText = d < 10 ? "0" + d : d;
-                document.getElementById("horas").innerText = h < 10 ? "0" + h : h;
-                document.getElementById("minutos").innerText = m < 10 ? "0" + m : m;
+            if (dist > 0) {
+                document.getElementById("dias").innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
+                document.getElementById("horas").innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("minutos").innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
             } else {
-                clearInterval(countdown);
                 document.getElementById("reloj").innerHTML = "<span>¡ES HOY! 🥳</span>";
             }
-        }, 1000);
+        }
+        
+        setInterval(actualizar, 1000);
+        actualizar(); // Ejecuta al cargar
     </script>
+</body>
+</html>
 </body>
 </html>
