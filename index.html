@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación de Areli 🎂</title>
+    <title>¡Mi Primer Añito! - Areli Valentina 🎂</title>
     
     <meta property="og:title" content="¡Invitación al Primer Añito de Areli Valentina Calderon Alva! 🎂">
     <meta property="og:description" content="Te esperamos para celebrar este día tan especial.">
@@ -17,6 +17,8 @@
             --rosa-areli: #ffdae9;
             --rosa-fuerte: #f06292;
             --texto: #4a4a4a;
+            --verde-wa: #25d366;
+            --azul-papa: #29b6f6;
         }
 
         body {
@@ -77,28 +79,29 @@
             padding: 15px;
             background-color: #fff9fb;
             border-radius: 20px;
+            text-align: left;
         }
 
         .dato {
             display: flex;
             align-items: center;
-            justify-content: center;
             margin-bottom: 10px;
             font-size: 0.9em;
         }
 
-        .icono { font-size: 1.5em; margin-right: 10px; }
+        .icono { font-size: 1.5em; margin-right: 15px; }
 
         .btn-mapa {
-            display: inline-block;
+            display: block;
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 10px;
             text-decoration: none;
             border-radius: 50px;
             font-size: 0.8em;
             font-weight: bold;
-            margin-top: 5px;
+            text-align: center;
+            margin-top: 10px;
         }
 
         .btn {
@@ -109,10 +112,12 @@
             margin: 10px 0;
             border-radius: 20px;
             font-weight: bold;
+            transition: 0.3s;
         }
 
-        .btn-mama { background-color: #ec407a; }
-        .btn-papa { background-color: #29b6f6; }
+        .btn-mama { background-color: var(--rosa-fuerte); }
+        .btn-papa { background-color: var(--azul-papa); }
+        .btn:active { transform: scale(0.95); }
 
         .reloj-container {
             display: flex;
@@ -147,13 +152,13 @@
             <div class="info-evento">
                 <div class="dato">
                     <span class="icono">📅</span>
-                    <p><b>Domingo, 29 de Marzo</b><br>3:30 PM</p>
+                    <div><b>Domingo, 29 de Marzo</b><br>3:30 PM</div>
                 </div>
                 <div class="dato">
                     <span class="icono">📍</span>
-                    <p><b>Salón de Eventos "La Prechochura"</b><br>Av. Oasis, Morales</p>
+                    <div><b>Salón de Eventos "La Prechochura"</b><br>Av. Oasis, Morales</div>
                 </div>
-                <a href="https://maps.google.com" target="_blank" class="btn-mapa">Ver ubicación 🗺️</a>
+                <a href="https://maps.app.goo.gl/Ejemplo" target="_blank" class="btn-mapa">Ver ubicación en el Mapa 🗺️</a>
             </div>
 
             <div class="cuenta-regresiva">
@@ -174,43 +179,47 @@
     </div>
 
     <script>
-        // 1. DATOS DE LA URL
+        // 1. CAPTURA DE DATOS DE LA URL
         const query = new URLSearchParams(window.location.search);
-        const nombreInvi = (query.get('invitados') || "Amigo/a").replace(/_/g, ' ');
+        const nombreInvi = (query.get('invitados') || "Invitado").replace(/_/g, ' ');
         const pasesInvi = query.get('pases') || "1";
 
         document.getElementById('txt-nombre').innerText = nombreInvi;
         document.getElementById('txt-pases').innerText = pasesInvi;
 
-        // 2. WHATSAPP
+        // 2. CONFIGURACIÓN DE WHATSAPP (Mensaje solicitado)
         const numMama = "51918668270"; 
         const numPapa = "51954132546";
-        const msgM = encodeURIComponent(`¡Hola mami de Areli! ✨ Soy ${nombreInvi}. ¡Confirmamos nuestra asistencia! Reserva nuestros ${pasesInvi} pases. 🎂`);
-        const msgP = encodeURIComponent(`¡Qué tal papá de Areli! 🎈 Soy ${nombreInvi}. Anótanos en la lista para celebrar (${pasesInvi} personas). 🌸`);
+        
+        // Mensaje: ¡Hola! Soy (Nombre), confirmo nuestra asistencia, nos vemos en el cumpleaños.
+        const textoMsg = `¡Hola! Soy (${nombreInvi}), confirmo nuestra asistencia, nos vemos en el cumpleaños. ✨`;
+        const msgEnc = encodeURIComponent(textoMsg);
 
-        document.getElementById('wa-mama').href = `https://wa.me/${numMama}?text=${msgM}`;
-        document.getElementById('wa-papa').href = `https://wa.me/${numPapa}?text=${msgP}`;
+        document.getElementById('wa-mama').href = `https://wa.me/${numMama}?text=${msgEnc}`;
+        document.getElementById('wa-papa').href = `https://wa.me/${numPapa}?text=${msgEnc}`;
 
-        // 3. CUENTA REGRESIVA (FECHA: 29 DE MARZO 2026)
+        // 3. CUENTA REGRESIVA (Fecha: 29 de Marzo 2026)
         const fechaFiesta = new Date("2026-03-29T15:30:00").getTime();
 
-        function actualizar() {
+        function actualizarReloj() {
             const ahora = new Date().getTime();
-            const dist = fechaFiesta - ahora;
+            const distancia = fechaFiesta - ahora;
 
-            if (dist > 0) {
-                document.getElementById("dias").innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
-                document.getElementById("horas").innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("minutos").innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+            if (distancia > 0) {
+                const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
+                const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+
+                document.getElementById("dias").innerText = d < 10 ? "0" + d : d;
+                document.getElementById("horas").innerText = h < 10 ? "0" + h : h;
+                document.getElementById("minutos").innerText = m < 10 ? "0" + m : m;
             } else {
                 document.getElementById("reloj").innerHTML = "<span>¡ES HOY! 🥳</span>";
             }
         }
-        
-        setInterval(actualizar, 1000);
-        actualizar(); // Ejecuta al cargar
+
+        setInterval(actualizarReloj, 1000);
+        actualizarReloj(); // Ejecutar al cargar
     </script>
-</body>
-</html>
 </body>
 </html>
